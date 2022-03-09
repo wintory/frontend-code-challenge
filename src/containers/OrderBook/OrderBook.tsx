@@ -15,25 +15,39 @@ const OrderBook: FC<TOrderBookStream> = ({ buy, sell }) => {
     >
       <OrderListBox>
         <OrderTable color={Colors.Mandy}>
-          <th>Price</th>
-          <th>Amount</th>
-          {buy.map(buyOrder => (
+          <thead>
             <tr>
-              <td>{buyOrder.price}</td> <td>{buyOrder.amount}</td>
+              <th>Price</th>
+              <th>Amount</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {sell.map(sellOrder => (
+              <tr key={sellOrder.price + sellOrder.amount}>
+                <td>{sellOrder.price}</td>
+                <td>{sellOrder.amount}</td>
+              </tr>
+            ))}
+          </tbody>
         </OrderTable>
       </OrderListBox>
       <Divider light />
       <OrderListBox>
         <OrderTable color={Colors.Elm}>
-          <th>Price</th>
-          <th>Amount</th>
-          {sell.map(sellOrder => (
+          <thead>
             <tr>
-              <td>{sellOrder.price}</td> <td>{sellOrder.amount}</td>
+              <th>Price</th>
+              <th>Amount</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {buy.map(buyOrder => (
+              <tr key={buyOrder.price + buyOrder.amount}>
+                <td>{buyOrder.price}</td>
+                <td>{buyOrder.amount}</td>
+              </tr>
+            ))}
+          </tbody>
         </OrderTable>
       </OrderListBox>
     </Wrapper>

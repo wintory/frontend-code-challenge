@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { TOrder, TOrderBookFunction, TOrderBookStream, TSide } from '../types/orderBook'
 
 const useOrderBookStream = () => {
-  const intervalRate = 2000
+  const intervalRate = 5000 // change interval to 5s
   let intervalId: number
   let currentData: TOrderBookStream
   const initialOrderBookStream = {
@@ -65,14 +65,13 @@ const useOrderBookStream = () => {
 
   useEffect(() => {
     currentData = produceData()
-
     intervalId = window.setInterval(() => {
       subscribers.forEach(callback => {
         currentData = produceData()
         callback(currentData)
       })
     }, intervalRate)
-  }, [])
+  }, [userOrder])
 
   return { destroy, unSubscribe, subscribe, addOrder, produceData }
 }
