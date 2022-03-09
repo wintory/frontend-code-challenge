@@ -1,1 +1,1 @@
-export const ZIPMEX_LOGO = '/assets/logo/zipmex.svg'
+export const ZIPMEX_LOGO = '/assets/logo/zipmex-logo.png'

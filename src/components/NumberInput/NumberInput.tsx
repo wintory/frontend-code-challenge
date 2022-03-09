@@ -15,6 +15,7 @@ export interface InputProps {
 }
 
 const NumberInput: FC<InputProps> = ({ min, max, name, value, onChange, decimal, error }) => {
+  // Todo: apply debounce value to this component
   const handleChange = (values: NumberFormatValues) => {
     if (onChange) onChange(values.value)
   }
