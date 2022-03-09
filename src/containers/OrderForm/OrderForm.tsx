@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
+import { Button } from '@mui/material'
+
+import NumberInput from '../../components/NumberInput/NumberInput'
 import { TOrderForm, TOrderFormData } from '../../types/orderForm'
+import Select from '../../components/Select/Select'
+import { SideOption } from '../../constants/option'
 
 const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
   const initialFormData: TOrderFormData = {
@@ -9,32 +14,39 @@ const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
   }
   const [formData, updateFormData] = useState<TOrderFormData>(initialFormData)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>) => {
+  const handleChange = (field: string, value: string) => {
     updateFormData({
       ...formData,
-      [event.target.name]: event.target.value.trim(),
+      [field]: value.trim(),
     })
+  }
+
+  const handlePriceChange = (value: string) => handleChange('price', value)
+  const handleAmountChange = (value: string) => handleChange('amount', value)
+  const handleSideChange = (value: string) => handleChange('side', value)
+
+  const handleSubmit = () => {
+    submitOrder(formData.side, {
+      price: formData.price,
+      amount: formData.amount,
+    })
+
+    updateFormData(initialFormData)
   }
 
   return (
     <div>
-      <form
-        onSubmit={event => {
-          event.preventDefault()
-          submitOrder(formData.side, {
-            price: formData.price,
-            amount: formData.amount,
-          })
-        }}
-      >
-        <select name='side' onChange={handleChange}>
-          <option value='buy'>Buy</option>
-          <option value='sell'>Sell</option>
-        </select>
-        <input name='price' type='number' onChange={handleChange} />
-        <input name='amount' type='number' onChange={handleChange} />
-        <button>Submit</button>
-      </form>
+      <Select options={SideOption} value={formData.side} onChange={handleSideChange} />
+      <NumberInput name='price' value={formData.price} type='number' onChange={handlePriceChange} />
+      <NumberInput
+        name='amount'
+        value={formData.amount}
+        type='number'
+        onChange={handleAmountChange}
+      />
+      <Button onClick={handleSubmit} variant='outlined' color='error'>
+        Submit Order
+      </Button>
     </div>
   )
 }
