@@ -20,6 +20,9 @@ const OrderList: FC = () => {
     subscribe((data: TOrderBookStream) => {
       setOrderBook(data)
     })
+
+    // Todo: setup lint to ignore react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSubmitOrder: TOrderForm['submitOrder'] = (side, { price, amount }) => {
