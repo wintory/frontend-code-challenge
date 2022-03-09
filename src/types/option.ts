@@ -1,5 +1,5 @@
 export type Option = {
-  key: string
-  label: string
-  value: string
+  key: string | number
+  label: string | number
+  value: string | number
 }
