@@ -1,23 +1,23 @@
-import { TOrderBookStream } from './order-book-stream'
+import { FC } from 'react'
+import { TOrderBookStream } from '../../types/orderBook'
 
-const OrderBook: React.FC<TOrderBookStream> = ({ buy, sell }) => {
-
+const OrderBook: FC<TOrderBookStream> = ({ buy, sell }) => {
   return (
     <div>
       <div>
         Buy
         <div>Price / Amount</div>
-        {buy.map((buyOrder) => (
+        {buy.map(buyOrder => (
           <div>
             {buyOrder.price} {buyOrder.amount}
           </div>
         ))}
       </div>
 
-			<div>
+      <div>
         Sell
         <div>Price / Amount</div>
-        {sell.map((sellOrder) => (
+        {sell.map(sellOrder => (
           <div>
             {sellOrder.price} {sellOrder.amount}
           </div>

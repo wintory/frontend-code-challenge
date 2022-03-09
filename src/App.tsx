@@ -1,30 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import zipmex from './zipmex.svg'
-import './App.css'
-import OrderForm, { TOrderForm } from './OrderForm'
-import OrderBook from './OrderBook'
-import orderBookStream, { TOrderBookStream } from './order-book-stream'
+import { useEffect, useState } from 'react'
 
-function App() {
+import OrderBook from './containers/OrderBook/OrderBook'
+import OrderForm from './containers/OrderForm/OrderForm'
+import useOrderBookStream from './containers/OrderBook/hooks/useOrderBookStream'
+
+import { ZIPMEX_LOGO } from './constants/image'
+
+import { TOrderBookStream } from './types/orderBook'
+import { TOrderForm } from './types/orderForm'
+
+import './App.css'
+
+const App = () => {
   const [orderBook, setOrderBook] = useState<TOrderBookStream>({
     buy: [],
     sell: [],
   })
+  const { subscribe, addOrder } = useOrderBookStream()
 
   useEffect(() => {
-    orderBookStream.subscribe((data) => {
+    subscribe((data: TOrderBookStream) => {
       setOrderBook(data)
     })
   }, [])
 
   const handleSubmitOrder: TOrderForm['submitOrder'] = (side, { price, amount }) => {
-    orderBookStream.addOrder(side, { price, amount })
+    addOrder(side, { price, amount })
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={zipmex} className="App-logo" alt="logo" />
+    <div className='App'>
+      <header className='App-header'>
+        <img src={ZIPMEX_LOGO} className='App-logo' alt='logo' />
       </header>
       <OrderForm submitOrder={handleSubmitOrder} />
       <OrderBook buy={orderBook.buy} sell={orderBook.sell} />
