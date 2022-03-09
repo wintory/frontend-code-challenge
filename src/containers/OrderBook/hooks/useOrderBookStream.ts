@@ -1,30 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import faker from 'faker'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { TOrder, TOrderBookFunction, TOrderBookStream, TSide } from '../../../types/orderBook'
 
 const useOrderBookStream = () => {
-  let intervalId: number
-  let subscribers: TOrderBookFunction[] = []
   const intervalRate = 2000
+  let intervalId: number
   let currentData: TOrderBookStream
-  let userOrder: TOrderBookStream = {
+  const initialOrderBookStream = {
     buy: [],
     sell: [],
   }
+  const [subscribers, setSubscribers] = useState<TOrderBookFunction[]>([])
+  const [userOrder, setUserOrder] = useState<TOrderBookStream>(initialOrderBookStream)
 
   const addOrder = (side: TSide, order: TOrder) => {
-    userOrder[side].push(order)
+    setUserOrder({
+      ...userOrder,
+      [side]: [...userOrder[side], order],
+    })
   }
 
   const unSubscribe = (unSubscribeIndex: number) => {
-    subscribers = subscribers.filter((_, index) => index !== unSubscribeIndex)
+    setSubscribers(subscribers.filter((_, index) => index !== unSubscribeIndex))
   }
 
   const destroy = () => {
     window.clearInterval(intervalId)
-    subscribers = []
+    setSubscribers([])
   }
 
   const produceData = () => {
@@ -50,7 +54,7 @@ const useOrderBookStream = () => {
 
   const subscribe = (callback: TOrderBookFunction) => {
     subscribers.push(callback)
-    callback(currentData)
+    callback(currentData || initialOrderBookStream)
     return () => {
       const index = subscribers.findIndex((subscriber: TOrderBookFunction) => {
         return subscriber === callback
@@ -61,6 +65,7 @@ const useOrderBookStream = () => {
 
   useEffect(() => {
     currentData = produceData()
+
     intervalId = window.setInterval(() => {
       subscribers.forEach(callback => {
         currentData = produceData()
