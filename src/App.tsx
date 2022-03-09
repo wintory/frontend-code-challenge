@@ -9,8 +9,6 @@ import { ZIPMEX_LOGO } from './constants/image'
 import { TOrderBookStream } from './types/orderBook'
 import { TOrderForm } from './types/orderForm'
 
-import './App.css'
-
 const App = () => {
   const [orderBook, setOrderBook] = useState<TOrderBookStream>({
     buy: [],
