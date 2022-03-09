@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderList should match snapshot 1`] = `
+<div
+  class="MuiGrid-root sc-jRQBWg eUNOvD css-18qtskw-MuiGrid-root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-item css-y526ko-MuiGrid-root"
+  >
+    <img
+      alt="logo"
+      class="sc-eCImPb jYisjZ App-logo"
+      src="/assets/logo/zipmex-logo.png"
+    />
+  </div>
+</div>
+`;

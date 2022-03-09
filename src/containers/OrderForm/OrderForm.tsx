@@ -27,12 +27,14 @@ const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
   const handleSideChange = (value: string) => handleChange('side', value)
 
   const handleSubmit = () => {
-    submitOrder(formData.side, {
-      price: formData.price,
-      amount: formData.amount,
-    })
+    if (formData.side && formData.price && formData.amount) {
+      submitOrder(formData.side, {
+        price: formData.price,
+        amount: formData.amount,
+      })
 
-    updateFormData(initialFormData)
+      updateFormData(initialFormData)
+    }
   }
 
   return (
