@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from 'react'
 
-import useOrderBookStream from '../containers/OrderBook/hooks/useOrderBookStream'
 import OrderBook from '../containers/OrderBook/OrderBook'
 import OrderForm from '../containers/OrderForm/OrderForm'
 import OrderHeader from '../containers/OrderHeader/OrderHeader'
+
+import useOrderBookStream from '../hooks/useOrderBookStream'
 
 import { TOrderBookStream } from '../types/orderBook'
 import { TOrderForm } from '../types/orderForm'

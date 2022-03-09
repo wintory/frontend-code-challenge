@@ -2,7 +2,7 @@
 import faker from 'faker'
 import { useEffect, useState } from 'react'
 
-import { TOrder, TOrderBookFunction, TOrderBookStream, TSide } from '../../../types/orderBook'
+import { TOrder, TOrderBookFunction, TOrderBookStream, TSide } from '../types/orderBook'
 
 const useOrderBookStream = () => {
   const intervalRate = 2000

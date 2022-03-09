@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Grid } from '@mui/material'
+import { Button } from '@mui/material'
 
 import NumberInput from '../../components/NumberInput/NumberInput'
 import { TOrderForm, TOrderFormData } from '../../types/orderForm'
 import Select from '../../components/Select/Select'
 import { SideOption } from '../../constants/option'
-import { Colors } from '../../constants/color'
 import { Wrapper } from './styled'
 
 const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
