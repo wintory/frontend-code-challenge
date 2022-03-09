@@ -73,7 +73,13 @@ const useOrderBookStream = () => {
     }, intervalRate)
   }, [userOrder])
 
-  return { destroy, unSubscribe, subscribe, addOrder, produceData, currentData }
+  return {
+    destroy,
+    unSubscribe,
+    subscribe,
+    addOrder,
+    produceData,
+  }
 }
 
 export default useOrderBookStream
