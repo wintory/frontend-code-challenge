@@ -24,10 +24,12 @@ export const OrderTable = styled.table`
 `
 
 export const Wrapper = styled(Grid)`
-  height: calc(100vh - 85px);
+  // removed header and footer
+  height: calc(100vh - 85px - 60px);
   overflow-y: auto;
 
   @media only screen and (max-width: 375px) {
-    height: calc(100vh - 60px);
+    // removed header and footer
+    height: calc(100vh - 60px - 60px);
   }
 `

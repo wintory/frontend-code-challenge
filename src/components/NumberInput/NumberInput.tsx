@@ -12,9 +12,21 @@ export interface InputProps {
   decimal?: number
   error?: string
   value?: string | number
+  placeholder?: string
+  allowNegative?: boolean
 }
 
-const NumberInput: FC<InputProps> = ({ min, max, name, value, onChange, decimal, error }) => {
+const NumberInput: FC<InputProps> = ({
+  min,
+  max,
+  name,
+  value,
+  onChange,
+  decimal,
+  error,
+  placeholder,
+  allowNegative = false,
+}) => {
   // Todo: apply debounce value to this component
   const handleChange = (values: NumberFormatValues) => {
     if (onChange) onChange(values.value)
@@ -23,13 +35,15 @@ const NumberInput: FC<InputProps> = ({ min, max, name, value, onChange, decimal,
   return (
     <NumberFormat
       value={value}
+      placeholder={placeholder}
       customInput={TextField}
-      label={name}
       error={!isEmpty(error)}
       helperText={error}
       decimalScale={decimal}
+      allowNegative={allowNegative}
       name={name}
-      inputProps={{ min, max }}
+      min={min}
+      max={max}
       thousandSeparator
       onValueChange={handleChange}
     />

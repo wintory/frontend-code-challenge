@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Button } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 
 import NumberInput from '../../components/NumberInput/NumberInput'
 import { TOrderForm, TOrderFormData } from '../../types/orderForm'
 import Select from '../../components/Select/Select'
 import { SideOption } from '../../constants/option'
+import { Colors } from '../../constants/color'
+import { Wrapper } from './styled'
 
 const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
   const initialFormData: TOrderFormData = {
@@ -35,11 +37,21 @@ const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <Select options={SideOption} value={formData.side} onChange={handleSideChange} />
-      <NumberInput name='price' value={formData.price} type='number' onChange={handlePriceChange} />
+      <NumberInput
+        name='price'
+        placeholder='price'
+        value={formData.price}
+        allowNegative={false}
+        type='number'
+        onChange={handlePriceChange}
+      />
       <NumberInput
         name='amount'
+        min={0}
+        placeholder='amount'
+        allowNegative={false}
         value={formData.amount}
         type='number'
         onChange={handleAmountChange}
@@ -47,7 +59,7 @@ const OrderForm: React.FC<TOrderForm> = ({ submitOrder }) => {
       <Button onClick={handleSubmit} variant='outlined' color='error'>
         Submit Order
       </Button>
-    </div>
+    </Wrapper>
   )
 }
 
