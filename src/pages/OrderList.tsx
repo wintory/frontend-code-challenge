@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 
-import { ZIPMEX_LOGO } from '../constants/image'
-
 import useOrderBookStream from '../containers/OrderBook/hooks/useOrderBookStream'
 import OrderBook from '../containers/OrderBook/OrderBook'
 import OrderForm from '../containers/OrderForm/OrderForm'
+import OrderHeader from '../containers/OrderHeader/OrderHeader'
 
 import { TOrderBookStream } from '../types/orderBook'
 import { TOrderForm } from '../types/orderForm'
@@ -31,11 +30,9 @@ const OrderList: FC = () => {
 
   return (
     <>
-      <header className='App-header'>
-        <img src={ZIPMEX_LOGO} className='App-logo' alt='logo' />
-      </header>
-      <OrderForm submitOrder={handleSubmitOrder} />
+      <OrderHeader />
       <OrderBook buy={orderBook.buy} sell={orderBook.sell} />
+      <OrderForm submitOrder={handleSubmitOrder} />
     </>
   )
 }
