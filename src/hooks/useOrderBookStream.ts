@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { TOrder, TOrderBookFunction, TOrderBookStream, TSide } from '../types/orderBook'
 
 const useOrderBookStream = () => {
-  const intervalRate = 5000 // change interval to 5s
+  const intervalRate = 2000
   let intervalId: number
   let currentData: TOrderBookStream
   const initialOrderBookStream = {
@@ -71,6 +71,10 @@ const useOrderBookStream = () => {
         callback(currentData)
       })
     }, intervalRate)
+
+    return () => {
+      clearInterval(intervalId)
+    }
   }, [userOrder])
 
   return {
